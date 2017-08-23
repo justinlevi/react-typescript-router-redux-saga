@@ -6,10 +6,11 @@ const logo = require('./logo.svg');
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { enthusiasm } from './reducers/index';
-import { StoreState } from './types/index';
 
-const store = createStore<StoreState>(enthusiasm, {
+import { enthusiasmReducer } from './reducers';
+import { StoreState } from './types';
+
+const store = createStore<StoreState>(enthusiasmReducer, {
   enthusiasmLevel: 1,
   languageName: 'Typescript',
 });
@@ -25,7 +26,7 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <Provider store={store}>
+        <Provider store={store} >
           <Hello />
         </Provider>
       </div>

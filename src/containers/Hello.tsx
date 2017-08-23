@@ -14,9 +14,9 @@
 import { connect, Dispatch } from 'react-redux';
 import * as actions from '../actions';
 import Hello from '../components/Hello';
-import { StoreState } from '../types/index';
+import { StoreState } from '../types';
 
-export function mapStateToProps({ enthusiasmLevel, languageName }: StoreState) {
+function mapStateToProps({ enthusiasmLevel, languageName }: StoreState) {
   return {
     enthusiasmLevel,
     name: languageName
@@ -30,10 +30,12 @@ export function mapStateToProps({ enthusiasmLevel, languageName }: StoreState) {
 // can pass actions into our store to make updates, so we can create 
 // a pair of callbacks that will call the dispatcher as necessary.
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.EnthusiasmAction>) {
+function mapDispatchToProps(dispatch: Dispatch<string>) {
   return {
-    onDecrement: () => dispatch(actions.decrementEnthusiasm()),
-    onIncrement: () => dispatch(actions.incrementEnthusiasm()),
+    onDecrement: () => dispatch(actions.decrement()),
+    onDecrementBy: () => dispatch(actions.decrementBy(10)),
+    onIncrement: () => dispatch(actions.increment()),
+    onIncrementBy: () => dispatch(actions.incrementBy(10)),
   };
 }
 

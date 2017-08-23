@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Hello.css';
 
-export interface Props {
+export interface HelloProps {
   name: string;
   enthusiasmLevel?: number;
 
@@ -9,11 +9,15 @@ export interface Props {
   // We'll add two optional callback properties to Props named onIncrement 
   // and onDecrement:
 
-  onIncrement: () => void;
-  onDecrement: () => void;
+  onIncrement?: () => void;
+  onDecrement?: () => void;
+
+  onIncrementBy?: () => void;
+  onDecrementBy?: () => void;
 }
 
-function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement}: Props) {
+function Hello({ 
+  name, enthusiasmLevel = 1, onIncrement, onDecrement, onIncrementBy, onDecrementBy}: HelloProps) {
   if (enthusiasmLevel <= 0) {
     throw new Error('You could be a little more enthusiastic. :D');
   }
@@ -23,10 +27,20 @@ function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement}: Props) {
       <div className="greeting">
         {name + ' HELL' + getExclamationMarks(enthusiasmLevel)}
       </div>
+
+      {(onDecrement !== undefined || onIncrement !== undefined) &&
+        <div>
+          <button onClick={onDecrement}>-</button>
+          <button onClick={onIncrement}>+</button>
+        </div>
+      }
+
+      {(onDecrementBy !== undefined || onIncrementBy !== undefined) &&
       <div>
-        <button onClick={onDecrement}>-</button>
-        <button onClick={onIncrement}>+</button>
+        <button onClick={onDecrementBy}>--</button>
+        <button onClick={onIncrementBy}>++</button>
       </div>
+      }
     </div>
   );
 }

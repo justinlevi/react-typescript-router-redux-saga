@@ -9,18 +9,21 @@
 // be to ensure that increments raise the enthusiasm level by 1, and 
 // that decrements reduce the enthusiasm level by 1, but that the level 
 // never falls below 1.
-
-import { EnthusiasmAction } from '../actions';
-import { DECREMENT_ENTHUSIASM, INCREMENT_ENTHUSIASM } from '../constants/index';
+import { ActionTypes } from '../actions';
+import { TypeKeys } from '../constants/index';
 import { StoreState } from '../types/index';
 
-export function enthusiasm(state: StoreState, action: EnthusiasmAction): StoreState {
+export function enthusiasmReducer(state: StoreState, action: ActionTypes): StoreState {
   // tslint:disable-next-line:switch-default
   switch (action.type) {
-    case INCREMENT_ENTHUSIASM: 
+    case TypeKeys.INCREMENT_ENTHUSIASM: 
       return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1};
-    case DECREMENT_ENTHUSIASM: 
+    case TypeKeys.DECREMENT_ENTHUSIASM: 
       return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
+    case TypeKeys.INCREMENT_BY_ENTHUSIASM:
+      return { ...state, enthusiasmLevel: state.enthusiasmLevel + action.by };
+    case TypeKeys.DECREMENT_BY_ENTHUSIASM:
+      return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - action.by) };
   }
   return state;
 }
@@ -34,3 +37,5 @@ export function enthusiasm(state: StoreState, action: EnthusiasmAction): StoreSt
 // pure functions, they can be passed arbitrary data.For every input, 
 // reducers can tested by checking their newly produced state.
 // Consider looking into Jest's toEqual method to accomplish this.
+
+// source: https://spin.atomicobject.com/2017/07/24/redux-action-pattern-typescript
