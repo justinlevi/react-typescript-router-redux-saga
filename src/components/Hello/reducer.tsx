@@ -9,21 +9,31 @@
 // be to ensure that increments raise the enthusiasm level by 1, and 
 // that decrements reduce the enthusiasm level by 1, but that the level 
 // never falls below 1.
-import { ActionTypes } from '../actions';
-import { TypeKeys } from '../constants/index';
-import { StoreState } from '../types/index';
+import { Action } from './Actions';
+import ActionTypes from './ActionTypes';
 
-export function enthusiasmReducer(state: StoreState, action: ActionTypes): StoreState {
+import { StateProps as HelloState } from './Hello';
+
+export const initialState: HelloState = {
+  enthusiasmLevel: 1,
+  name: 'Typescript',
+};
+
+export type HelloState = HelloState;
+
+export default function reducer(state: HelloState = initialState, action: Action): HelloState {
+  const val = state.enthusiasmLevel === undefined ? 0 : state.enthusiasmLevel as number;
+
   // tslint:disable-next-line:switch-default
   switch (action.type) {
-    case TypeKeys.INCREMENT_ENTHUSIASM: 
-      return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1};
-    case TypeKeys.DECREMENT_ENTHUSIASM: 
-      return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
-    case TypeKeys.INCREMENT_BY_ENTHUSIASM:
-      return { ...state, enthusiasmLevel: state.enthusiasmLevel + action.by };
-    case TypeKeys.DECREMENT_BY_ENTHUSIASM:
-      return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - action.by) };
+    case ActionTypes.INCREMENT_ENTHUSIASM:
+      return { ...state, enthusiasmLevel: val + 1 };
+    case ActionTypes.DECREMENT_ENTHUSIASM:
+      return { ...state, enthusiasmLevel: Math.max(1, val - 1) };
+    case ActionTypes.INCREMENT_BY_ENTHUSIASM:
+      return { ...state, enthusiasmLevel: val + action.by };
+    case ActionTypes.DECREMENT_BY_ENTHUSIASM:
+      return { ...state, enthusiasmLevel: Math.max(1, val - action.by) };
   }
   return state;
 }

@@ -1,23 +1,28 @@
 import * as React from 'react';
-import './Hello.css';
+import './hello.css';
 
-export interface HelloProps {
-  name: string;
-  enthusiasmLevel?: number;
-
-  // let's update the props interface so that it can modify state. 
-  // We'll add two optional callback properties to Props named onIncrement 
-  // and onDecrement:
-
+export interface DispatchProps {
   onIncrement?: () => void;
   onDecrement?: () => void;
-
   onIncrementBy?: () => void;
   onDecrementBy?: () => void;
 }
 
-function Hello({ 
-  name, enthusiasmLevel = 1, onIncrement, onDecrement, onIncrementBy, onDecrementBy}: HelloProps) {
+export interface StateProps {
+  name: string;
+  enthusiasmLevel?: number;
+}
+
+type HelloState = StateProps & DispatchProps;
+
+const Hello: React.StatelessComponent<HelloState> = ({
+  name, 
+  enthusiasmLevel = 1, 
+  onIncrement, 
+  onDecrement, 
+  onIncrementBy, 
+  onDecrementBy }) => {
+  
   if (enthusiasmLevel <= 0) {
     throw new Error('You could be a little more enthusiastic. :D');
   }
@@ -43,7 +48,7 @@ function Hello({
       }
     </div>
   );
-}
+};
 
 export default Hello;
 
