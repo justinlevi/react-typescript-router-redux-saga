@@ -1,7 +1,8 @@
+import createBrowserHistory from 'history/createBrowserHistory';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import { Routes } from './routes';
 
 import { configureStore } from './configureStore';
@@ -9,7 +10,8 @@ import { configureStore } from './configureStore';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = configureStore();
+const history = createBrowserHistory();
+const store = configureStore(history);
 
 // tslint:disable-next-line:no-namespace
 declare global {
@@ -21,10 +23,11 @@ declare global {
 
 ReactDOM.render(
   <Provider store={store} >
-    <Router>
+    <ConnectedRouter history={history}>
       <Routes />
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
+
 registerServiceWorker();

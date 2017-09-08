@@ -12,6 +12,7 @@
 // and adjust it if necessary, for our component's props. 
 
 import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
 
 import { decrement, decrementBy, increment, incrementBy } from './ActionCreators';
@@ -38,3 +39,4 @@ const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>): DispatchProps =>
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hello);
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Hello));
