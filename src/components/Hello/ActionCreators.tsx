@@ -1,5 +1,4 @@
-import { Decrement, DecrementBy, Increment, IncrementBy } from './Actions';
-import ActionTypes from './ActionTypes';
+import { ActionTypes, Decrement, DecrementBy, Increment, IncrementBy } from './Actions';
 
 export function increment(): Increment {
   return {

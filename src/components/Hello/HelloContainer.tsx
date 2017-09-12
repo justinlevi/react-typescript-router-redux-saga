@@ -17,6 +17,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import { decrement, decrementBy, increment, incrementBy } from './ActionCreators';
 // import Hello, { DispatchProps, StateProps } from './Hello';
+// import { ActionTypes } from './Actions';
 import Hello, { DispatchProps } from './Hello';
 
 import { AppState } from '../../rootReducer';
@@ -33,7 +34,8 @@ function mapStateToProps({ hello }: AppState) {
 
 const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>): DispatchProps => ({
   onDecrement: bindActionCreators(decrement, dispatch),
-  onDecrementBy: bindActionCreators(decrementBy, dispatch),
+  // alternative to calling dispatch directly : see incrementBy below
+  onDecrementBy: bindActionCreators(() => decrementBy(10), dispatch), 
   onIncrement: bindActionCreators(increment, dispatch),
   onIncrementBy: () => dispatch(incrementBy(10)),
 });

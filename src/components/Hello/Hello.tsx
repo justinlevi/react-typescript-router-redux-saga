@@ -30,7 +30,7 @@ const Hello: React.StatelessComponent<HelloState> = ({
   return (
     <div className="hello">
       <div className="greeting">
-        {name + ' HELL' + getExclamationMarks(enthusiasmLevel)}
+        {'Hello ' + name + getExclamationMarks(enthusiasmLevel)}
       </div>
 
       {(onDecrement !== undefined || onIncrement !== undefined) &&

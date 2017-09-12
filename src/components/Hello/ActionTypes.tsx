@@ -1,9 +1,0 @@
-export enum ActionTypes {
-  INCREMENT_ENTHUSIASM,
-  DECREMENT_ENTHUSIASM,
-  INCREMENT_BY_ENTHUSIASM,
-  DECREMENT_BY_ENTHUSIASM,
-  OTHER_ACTION,
-}
-
-export default ActionTypes;

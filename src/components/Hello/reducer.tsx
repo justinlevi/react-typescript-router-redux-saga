@@ -12,14 +12,13 @@
 
 import { Reducer } from 'redux';
 
-import { Action } from './Actions';
-import ActionTypes from './ActionTypes';
+import { Action, ActionTypes } from './Actions';
 
 import { StateProps as HelloState } from './Hello';
 
 export const initialState: HelloState = {
   enthusiasmLevel: 1,
-  name: 'Typescript',
+  name: 'Justin',
 };
 
 // Just renaming the StateProps from the Hello Component

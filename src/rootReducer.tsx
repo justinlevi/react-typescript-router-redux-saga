@@ -7,7 +7,10 @@ import helloReducer,
   initialState as helloInitialState,
 } from './components/Hello/reducer';
 
+import authReducer, { AuthState } from './auth/reducer';
+
 export interface AppState {
+  auth: AuthState;
   hello: HelloState;
 }
 
@@ -16,7 +19,8 @@ export interface AppState {
 // };
 
 export const rootReducer = combineReducers<AppState>({
-  hello: recycleState(helloReducer, [], helloInitialState)
+  auth: authReducer,
+  hello: recycleState(helloReducer, [], helloInitialState),
 });
 
 export default rootReducer;
