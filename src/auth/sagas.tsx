@@ -1,30 +1,30 @@
-import { push } from 'react-router-redux';
+// import { push } from 'react-router-redux';
 import { delay } from 'redux-saga';
-import { call, put, take } from 'redux-saga/effects';
+import { 
+  call,
+  put, 
+  take, 
+  takeEvery 
+} from 'redux-saga/effects';
 
 import {
+  Action,
   ActionTypes,
   // loginFailure,
   loginSuccess,
+  logout
 } from './Actions';
 
-export function* loginRequestSaga() {
-  yield put({type: ActionTypes.LOGIN_REQUEST});
+export function* loginRequestSaga(action: Action) {
+  // yield put({type: ActionTypes.LOGIN_REQUEST});
   yield call(delay, 500);
   yield put(loginSuccess('asbasdfa'));
-  console.log('loginRequestSaga!');
+  console.log(action.type + 'loginRequestSaga!');
 }
 
-/*
-  while (true) {
-    yield take(LOGIN_REQUEST);
-    yield call(loginRequestSaga);
-  }
-  */
 export function* watchLoginRequest() {
   console.log('watchLoginRequest!');
-  yield take(ActionTypes.LOGIN_REQUEST);
-  yield call(loginRequestSaga);
+  yield takeEvery(ActionTypes.LOGIN_REQUEST, loginRequestSaga);
 }
 
 export function* watchLoginSuccess() {
@@ -38,9 +38,9 @@ export function* watchLoginFailure() {
 }
 
 export function* watchLogout() {
-  yield take(ActionTypes.LOGOUT);
-  
+  yield takeEvery(ActionTypes.LOGOUT, logout);
+
   console.log('LOGOUT');
 
-  yield put(push('/'));
+  // yield put(push('/'));
 }
