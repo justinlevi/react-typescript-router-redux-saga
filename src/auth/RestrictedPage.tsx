@@ -27,8 +27,8 @@ class RestrictedPage extends React.PureComponent<RestrictedPageProps & StateProp
 
     if (!idToken) {
       // tslint:disable-next-line:no-console
-      console.log('NO TOKEN YO');
-      actions.loginRequest();
+      console.log(actions + 'NO TOKEN YO');
+      // actions.loginRequest();
     }
   }
 
