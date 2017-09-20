@@ -8,7 +8,9 @@ import { Routes } from './routes';
 
 import { configureStore } from './configureStore';
 
-import './index.css';
+// import './index.css';
+import './styles/index.css';
+
 import registerServiceWorker from './registerServiceWorker';
 
 const history = createBrowserHistory();

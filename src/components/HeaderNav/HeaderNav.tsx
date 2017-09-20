@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import NavItem from '../RouterNavItem';
 
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
@@ -27,19 +29,29 @@ export interface DispatchProps {
   - Why does this need to be a StatelessComponent to work? Why can't I extend Component?
   - Why doesn't code completion work when I type React. then control + space
 */ 
-const Navbar: React.StatelessComponent<StateProps & DispatchProps> = ({ 
+export const HeaderNav: React.StatelessComponent<StateProps & DispatchProps> = ({ 
   idToken, handleLogin, handleLogout }) => {
 
   return (
-    <div style={{ borderBottom: '1px solid #333', backgroundColor: '#F7F7F7', textAlign: 'center', padding: '1em', }}>
-      <NavLink style={{margin: '1em'}} to="/" exact={true} >HOME</NavLink>&nbsp;|&nbsp;
-      <NavLink style={{ margin: '1em' }} to="/about" >ABOUT</NavLink>&nbsp;|&nbsp;
-      <NavLink style={{ margin: '1em' }} to="/admin" >ADMIN</NavLink>&nbsp;|&nbsp;
-      <button style={{ margin: '1em' }}>
-        <div onClick={idToken ? handleLogout : handleLogin}>
-          {idToken ? 'LOGOUT' : 'LOGIN'}
-        </div></button>
-    </div>
+    <Navbar fluid={true}>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Link to="/">Home</Link>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Nav>
+          <NavItem href="/about">ABOUT</NavItem>
+          <NavItem href="/admin">ADMIN</NavItem>
+        </Nav>
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullRight={true} >
+          <NavItem href="#login" onClick={idToken ? handleLogout : handleLogin}>
+            <div className="login-logout">{idToken ? 'LOGOUT' : 'LOGIN'}</div>
+          </NavItem>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
@@ -54,4 +66,4 @@ const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>): DispatchProps =>
   handleLogout: bindActionCreators(logout, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);

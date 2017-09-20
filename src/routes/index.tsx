@@ -15,7 +15,7 @@ import { Route, Switch } from 'react-router';
 
 import RestrictedPage from '../auth/RestrictedPage';
 
-import Navbar from '../components/Navbar';
+import Navbar from '../components/HeaderNav';
 
 // import { DispatchProps } from '../components/Navbar/Navbar';
 
@@ -37,15 +37,19 @@ import Home from '../views/Home';
 export const Routes: React.StatelessComponent = () => (
   <div>
     <Navbar />
-    <Switch>
-      <Route path="/" exact={true} component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/admin" >
-        <RestrictedPage>
-          <Admin />
-        </RestrictedPage>
-      </Route>
-    </Switch>
+    <div className="container">
+      <div className="row">
+        <Switch>
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/admin" >
+              <RestrictedPage>
+                <Admin />
+              </RestrictedPage>
+            </Route>
+        </Switch>
+      </div>
+    </div>
   </div>
 );
 

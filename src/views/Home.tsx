@@ -13,6 +13,7 @@ class Home extends React.Component {
 
     return (
       <div className="App">
+        <h1>Home page</h1>
         {/* <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>

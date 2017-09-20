@@ -3,9 +3,9 @@ import * as React from 'react';
 class Admin extends React.Component {
   public render() {
     return (
-      <div>
+      <h1>
         Admin Page stuff
-      </div>
+      </h1>
     );
   }
 }
